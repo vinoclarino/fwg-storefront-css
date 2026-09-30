@@ -1,0 +1,88 @@
+/* ==========================================================================
+   Component Wine Co. — Commerce7 storefront
+   Collection / allocation page layout, matching the Gagnon-Kennedy fix.
+
+   Layout only. No fonts or brand colours are set here, so Component's own
+   theme typography is untouched.
+
+   Verified live on /collection/fall-2026-allocation on 30 Sept 2026.
+   ========================================================================== */
+
+/* 1. Commerce7 splits a collection into a "featured" list (first two wines)
+      and a regular list, and styles them differently. Flatten both into one
+      row so every wine gets the same treatment. */
+.c7-product-collection__products {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+}
+.c7-product-collection__products--featured,
+.c7-product-collection__products .c7-product-collection__product-list {
+  display: contents;
+}
+
+/* 2. The empty grey box: an extra featured slot inside the intro text that
+      renders a product with nothing in it. Hide the whole intro-level slot. */
+.c7-product-collection__content .c7-product-collection__products {
+  display: none;
+}
+/* Belt and braces: any product card with no title has nothing to show. */
+.c7-product-collection .c7-product:not(:has(.c7-product__title)) {
+  display: none;
+}
+
+/* 3. Product cards: three across, centred, no grey card background */
+.c7-product-collection .c7-product,
+.c7-product-collection__product-list .c7-product {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+  width: 33.333%;
+  padding: 0 30px;
+  margin-bottom: 40px;
+  background: transparent;
+  border-radius: 0;
+}
+
+/* 4. Images: same size and position on every card */
+.content .c7-product-collection .c7-product__image,
+.c7-product-collection .c7-product__image {
+  margin: 0 0 20px 0;
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+.c7-product-collection .c7-product__image img {
+  width: 200px;
+  height: 300px;
+  object-fit: cover;
+}
+
+/* 5. Details column */
+.c7-product-collection .c7-product .c7-product__details {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+}
+.c7-product-collection__product-list .c7-product__teaser p {
+  opacity: 0.6;
+}
+
+/* 6. Responsive: two across on tablets, one on phones */
+@media (max-width: 900px) {
+  .c7-product-collection .c7-product,
+  .c7-product-collection__product-list .c7-product { width: 50%; }
+}
+@media (max-width: 560px) {
+  .c7-product-collection .c7-product,
+  .c7-product-collection__product-list .c7-product { width: 100%; padding: 0 10px; }
+}
